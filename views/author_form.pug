@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    if result.msg
+        div(class='warning')
+            span(style='font-size:100%; color:navy') #[em  #{result.msg}]
+        //- script result.msg = 'Author created, proceed'
+    //- h1(class='form')= title
+    form(method='POST', action=`../author/create?${Object.keys(result).map(key => key + '=' + result[key]).join('&')}`)
+        label First Name:
+        input(type='text', placeholder='first name', name='first_name', value=(undefined===result?'': result.first_name?result.first_name: result.author?result.author.split(' ')[1]: ''))
+        label Family Name:
+        input(type='text', placeholder='family name', name='family_name', value=(undefined===result?'':result.family_name?result.family_name: result.author?result.author.split(' ')[0]: ''))
+        label Born:
+        input(type='date', name='born', value=(undefined===result?'': result.date_of_birth))
+        label Died:
+        input(type='date', name='died', value=(undefined===result?'': result.date_of_death))
+        input(type='submit', value='Send')
+
+    if errors
+        div(class='danger', style='margin-left:25%; width:50%; font-size:100%; margin-top: 2%')
+            ul
+                for error in errors
+                    li #{error.msg}

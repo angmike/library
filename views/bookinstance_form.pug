@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    //- if book.msg
+    //-     div(class='warning')
+    //-         span(style='font-size:100%; color:white') #[em  #{book.msg}]
+
+    //- h1(style='text-align:center')= title
+
+    form(method='POST', action='' + `?${Object.keys(book).map(key => key + '=' + book[key]).join('&')}`)
+        if(book.titles)
+            label(for='title') Title:
+            select(name='title', type='text', id='title', onchange='textInput(event, "title")')
+                if(!book.title)
+                    option(selected, value='') -- select an option --
+                else
+                    option(selected, value=book.title) #{book.title}
+                for item in book.titles
+                    option #{item.title}
+                option other
+            label(for='imprint') Imprint:
+            input(name='imprint', placeholder='enter book imprint', type='text', class='', value=(book.constructor!==Array?book.imprint: ''))
+        else if(book.title)
+            label(for='title') Title:
+            input(type='text', name='title', value=book.title, readonly)
+            label(for='imprint') Imprint:
+            input(name='imprint', placeholder='enter book imprint', type='text', class='', value=(book.constructor!==Array?book.imprint: ''))
+        else
+            p update many?
+        label(for='status') Status:
+        select(name='status', type='text', id='status')
+            if(!book.status)
+                option(selected, value='') -- select an option --
+            for st in ['Available', 'Maintenance', 'Loaned', 'Reserved']
+                if(st==book.status)
+                    option(selected) #{st}
+                else
+                    option #{st}
+        label(for='due_back') Due back:
+        input(name='due_back', placeholder='enter book due_back', type=(book.due_back)?'text': 'date', class='', value=(book.due_back?book.due_back: ''), id='dt', onclick='calendar()')
+        input(type='submit', class='submit', value='submit')
+        button(type='button' onclick='javascript:history.go(-1)') cancel
+
+    if book.errors
+        div(class='danger', style='margin-left:25%; width:50%; font-size:100%; margin-top: 2%')
+            ul
+                for error in book.errors
+                    if(error.msg)
+                        li #{error.msg}
+                    else
+                        li #{error}
+
+    script(src='/javascripts/scripts.js')

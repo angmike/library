@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  if result.msg
+    div(class='warning')
+      span(style='font-size:100%; color:white') #[em  #{result.msg}]
+
+  //- h1= title
+  hr
+  div(id='action')
+    button(class='action', id='update', disabled)
+      a(href=`../catalog/bookinstance/?/update`, class='inactive') update
+    button(class='action', id='delete', disabled)
+      a(href=`../catalog/bookinstance/?/delete`, class='inactive') delete
+  hr
+  input(type="text", value=(result.id), hidden, id='hidden')
+  table(id='copies', class='display' onload='shout()')
+    thead
+      tr
+        th(styl='text-align:center')
+          div(class='all')
+            input(type='checkbox', id='all', class='all')
+            label(for='all', class='all') select
+        th(style='text-align:center') book copy
+        //- th(style='text-align:center') status
+    tbody
+      each val in result.bookinstance_list
+        tr
+          td(class='check')
+            input(type='checkbox', class='checkbox')
+          td(style='text-align:jusify')
+            //- li
+            input(type="text", value=(val._id) hidden class='hidden')
+            a(href=val.url) #{val.book.title} : #{val.imprint} -
+            //- td
+            if val.status=='Available'
+              span.text-success  #{val.status}
+            else if val.status=='Maintenance'
+              span.text-danger  #{val.status}
+            else
+              span.text-warning  #{val.status}
+            if val.status!='Available'
+              span  (Due: #{val.due_back_formatted} )
+      else
+        li There are no book copies in this library.
+  //- hr
+  //- div(id='action')
+  //-   button(class='action', id='delete', disabled) delete
+  //-   button(class='action', id='update', disabled) update
+  //- hr
+  //- div(class='all', style='min-width:70%; padding-left:-1%')
+  //-   input(type='checkbox', id='all', class='all' style='width:2.5%;')
+  //-   label(for='all', class='all') select
+  //- ul(style='list-style-position: inside; padding-left: 0;')
+  //-   each val in result.bookinstance_list
+  //-     li(class='all', style='list-style-type:none; min-width:70%')
+  //-       input(type='checkbox', class='all checkbox', style='width:2.5%;')
+  //-       a(href=val.url class='listlink') #{val.book.title} : #{val.imprint} -
+  //-       if val.status=='Available'
+  //-         span.text-success  #{val.status}
+  //-       else if val.status=='Maintenance'
+  //-         span.text-danger  #{val.status}
+  //-       else
+  //-         span.text-warning  #{val.status}
+  //-       if val.status!='Available'
+  //-         span  (Due: #{val.due_back_formatted} )
+  //-     br
+  //-   else
+  //-     li() There are no book copies in this library
+
+  script(src='/javascripts/scripts.js')

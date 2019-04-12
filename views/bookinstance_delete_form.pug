@@ -1,0 +1,7 @@
+extends bookinstance_detail
+
+block con
+    p Do you really want to delete these #{count} books?
+    form(method='POST', action='')
+        button(type='submit') Delete
+        button(type='button' onclick='javascript:history.go(-1)') cancel

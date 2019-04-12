@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    if result.msg
+        if result.success
+            div(class='success')
+                p #{result.msg}
+        else
+            div(class='danger')
+                p #{result.msg}
+                    span(style='font-size:60%; color:green') #[em  If this is not what you wanted to create, try modifying the name to differentiate from what is in the system]
+
+    //- h1= title
+    p #{result.author.birth}
+    if result.author.dead
+        p #{result.author.dead}
+    div(style='margin-left:20px;margin-top:20px')
+        dl
+            h4 Books (#{count})
+            each book in result.books
+                dt
+                    a(href= book.url) #{book.title} :
+                dd #{book.summary}
+                dd #[em #[strong #{book.genre[0].name}]]
+            else
+                dd No books by #{result.author.name} in library
+
+    script(src='/javascripts/scripts.js')

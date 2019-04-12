@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    div(id='container')
+        div(id='main')
+            h4 Books Borrowed
+            ul
+                for book in user.books
+                    li
+                        a(href=book.url) #{book.title}:
+                        span #[em book.imprint]
+                        |   book.due_back
+                else
+                    li You have borrowed no books
+            hr
+            h4 Surcharges
+            hr
+            h4 Books Owned
+            p #{token}
+        div(id='profile')
+            div(id='pic')
+            div(id='bio')
+                p Name: #{user.name}
+                //- p Born: #{user.birth}
+            div(id='credentials')
+                p Email: #{user.email}

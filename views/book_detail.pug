@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    //- if result.msg
+    //-     if result.success
+    //-         div(class='success')
+    //-             p #{result.msg}
+    //-     else
+    //-         div(class='danger')
+    //-             p #{result.msg}
+    //-                 span(style='font-size:60%; color:green') #[em  If this is not what you wanted to create, try modifying the name to differentiate from what is in the system]
+
+    //- h1 #{result.detail.title}
+
+    p #[strong Author: ]
+        a(href=result.detail.author.url) #{result.detail.author.name}
+    p #[strong Summary: ] #{result.detail.summary}
+    p #[strong ISBN: ] #{result.detail.isbn}
+    p #[strong Genre: ]
+        if result.detail.genre[0]
+            a(href=result.detail.genre[0].url) #{result.detail.genre[0].name}
+        else
+            span unknown
+    div(style='margin-left:20px;margin-top:20px')
+        h4 Copies (#{result.count})
+        hr
+        dl
+            span.text-success Available
+            each book in result.available
+                dd #[strong Imprint: ] #{book.imprint}
+                p #[strong Id: ]
+                    a(href=book.url) #{book.id}
+        hr
+        p
+            span.text-danger Maintenance
+        each book in result.maintenance
+            p #[strong Imprint: ] #{book.imprint}
+            p #[strong Due_back: ] #{book.due_back_formatted}
+            p #[strong Id: ]
+                a(href=book.url) #{book.id}
+
+        hr
+        p #{result.detail.url}
+        p
+            a(href = result.detail.url + '/delete') Delete Book
+        p
+            a(href = result.detail.url + '/update') Update Book

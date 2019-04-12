@@ -1,0 +1,31 @@
+{
+  "name": "library",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "deb": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.6.2",
+    "cookie-parser": "~1.4.3",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "dotenv": "^7.0.0",
+    "express": "~4.16.0",
+    "express-mailer": "^0.3.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "http-errors": "~1.6.2",
+    "js-alert": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.18",
+    "mongoose-unique-validator": "^2.0.2",
+    "morgan": "~1.9.0",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

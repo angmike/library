@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    //- if instance.msg
+    //-     div(class='warning')
+    //-         span(style='font-size:100%; color:white') #[em  #{instance.msg}]
+
+    //- h1= title
+    if instance.constructor==Array
+        ul
+            each copy in instance
+                li
+                    a(href=copy.book.url) #{copy.book.title }
+                    |  #{copy.imprint}: #{copy.status}
+    else
+        p #[strong Title: ]
+            a(href=instance.book.url) #{instance.book.title}
+        p #[strong Imprint: ] #{instance.imprint}
+        p #[strong Status: ]
+            if instance.status=='Available'
+                span.text-success #{instance.status}
+            else if instance.status=='Maintenance'
+                span.text-danger #{instance.status}
+            else
+                span.text-warning #{instance.status}
+        if instance.status != 'Available'
+            p #[strong Due back: ]
+                if instance.diff > 0
+                    span.text-danger #{instance.due_back_formatted}, (#{instance.diff} days overdue )
+                else
+                    span.text-success #{instance.due_back_formatted}, (#{instance.diff} days due )
+    hr
+    block con
+        //- a(href=`../bookinstance/${instance._id}/delete`) Delete copy?
+        if instance.constructor!==Array
+            p
+                a(href=`${instance.url}/delete`) Delete Copy
+            p
+                a(href=`${instance.url}/update?title=${encodeURIComponent(instance.book.title)}&status=${instance.status}&due_back=${instance.due_back_formatted}&imprint=${instance.imprint}`) Update Copy

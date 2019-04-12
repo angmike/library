@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    if genre.msg
+        div(class='warning')
+            span(style='font-size:100%; color:navy') #[em  #{genre.msg}]
+
+    h1(class='form')= title
+
+    form(method='POST', action=`../genre/create?${Object.keys(genre).map(key => key + '=' + genre[key]).join('&')}`)
+        label Name
+        input(placeholder='genre name', name='name', type='text', value=(undefined===genre?'': genre.name?genre.name: genre.genre))
+        input(type='submit', value='send', style='')
+        script(src='/javascripts/scripts.js')
+
+    if errors
+        div(class='danger', style='margin-left:25%; width:50%; font-size:100%; margin-top: 2%')
+            ul
+                for error in errors
+                    li #{error.msg}

@@ -1,0 +1,215 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+/* input:first-letter {
+    text-transform:capitalize;
+} */
+
+.warning {
+    padding:1%;
+    background:skyblue;
+    color: navy;
+    font-size:150%
+}
+
+.success {
+    padding:1%;
+    background:green;
+    color:white;
+    font-size:150%
+}
+
+.danger {
+    padding:1%;
+    background:yellow;
+    color:red;
+    font-size:150%
+}
+
+.form {
+    text-align:center;
+}
+
+form {
+    background:none;
+    margin-left:25%;
+    margin-top: 5%;
+    width:50%;
+    /* padding: 1%; */
+    /* background:skyblue */
+}
+
+label {
+    margin:.5%;
+}
+
+input, select {
+    /* margin:.5%; */
+    width:100%;
+    text-indent:1%;
+    padding: .5% 0%;
+    height: 2%;
+}
+
+/* select {
+    padding: .6% 0%;
+} */
+
+.submit {
+    width: 15%;
+    background: blue;
+    color: white;
+    margin-top: 1%;
+    border: none
+}
+
+textarea {
+    text-indent: 1%;
+}
+
+.other {
+    display: none;
+}
+
+button {
+    padding: .5%;
+    /* background: blue;
+    color: white; */
+    border: none;
+    margin: 1%;
+}
+
+table tbody td a:hover, .listlink:hover {
+    text-decoration: none;
+}
+
+table tbody tr:hover, li:hover {
+    background: lightsteelblue;
+}
+
+#all {
+    cursor: pointer;
+}
+
+/*align select all checkbox and label*/
+.all {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* style action menu bar */
+#action {
+    margin: -.8%;
+}
+
+/* style action buttons */
+.action {
+    padding: .2% .4%;
+    border-radius: 10%;
+    margin: -2% 1%
+}
+
+.action a {
+    text-decoration: none;
+}
+
+.hr {
+    margin: 0%;
+}
+
+/* deactivate and remove text decoration action buttons */
+.inactive {
+    pointer-events: none;
+}
+
+:focus {
+    outline: none;
+}
+
+.cancel a {
+    text-decoration: none;
+}
+
+.top-nav a {
+    margin: 1% 10%;
+}
+
+.top-nav {
+    padding: 1% 5% 0% 0%;
+    background: yellow
+}
+
+#container {
+    display: flex;
+    background: lightgrey;
+    width: 100%;
+}
+
+#main {
+    /* display: table-column; */
+    width: 60%;
+}
+
+#profile {
+    /* display: table-column; */
+    width: 40%;
+    background: violet;
+    height: 100%;
+    margin: 0;
+}
+
+.eye {
+    width: 30px;
+    height: 15px;
+    border-radius: 50%;
+    /* border: solid 1px black; */
+    right: 2%;
+    top: calc(50% - 5px);
+    position: absolute;
+    background: gray;
+    display: none;
+}
+
+#pupil {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: black;
+    margin: 0px auto;
+    box-shadow: inset 1px 1px 1px 1px white;
+}
+
+.with-eye {
+    display: flex;
+    /* height: fit-content; */
+    position: relative;
+}
+
+#code, #tel{
+    display: inline;
+    margin: 0%;
+    /* border: none; */
+}
+
+#code{
+    width: 15%;
+    border-right: none;
+}
+
+#tel{
+    width: 84.5%;
+    border: none;
+    /* border-block-start-width: 0px; */
+}
+
+#contact{
+    /* display: inline; */
+    padding: 0%;
+    border: solid .1px rgb(160, 158, 158);
+}
+
+h1 {
+    text-align: center;
+}

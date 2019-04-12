@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    //- h1= title
+
+    ul
+        each val in author_list
+            li
+                a(href= val.url) #{val.name}
+                |   Born: #{val.birth} ;
+                if val.date_of_death
+                    span  Died: #{val.death};
+                    span  lived for: #{val.lifespan} years
+
+        else
+            li No Authors

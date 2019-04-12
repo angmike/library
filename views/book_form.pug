@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    //- if book.msg
+        div(class='warning')
+            span(style='font-size:100%; color:white') #[em  #{book.msg}]
+
+    //- h1(class='form')= title
+    form(method='POST', action=''+'?'+Object.keys(book).map(key=>key+'='+book[key]).join('&'))
+        label(for='title') Title:
+        input(name='title', type='text', class='', placeholder='Book Title', value=(undefined===book?'': book.title))
+        label(for='author') Author:
+        select(name='author', type='text', id='author', class='checkbox', onchange='textInput(event, "author")')
+            if book.author && book.author.constructor === Array
+                each author in book.author
+                    option #{author.name}
+                option other
+            else
+                option(selected) #{book.author.name}
+                option() reload list
+                option other
+        label(for='isbn') ISBN:
+        input(name='isbn', type=number, class='', placeholder='Book ISBN', value=(undefined===book?'': book.isbn))
+        label(for='genre') Genre:
+        select(name='genre', type='text', id='genre', onchange='textInput(event, "genre")')
+            if book.genre && book.genre.constructor === Array
+                for genre in book.genre
+                    option(value=genre.name) #{genre.name}
+                option other
+            else
+                option(value=book.genre, selected) #{book.genre}
+                option() reload list
+                option other
+        label(for='summary') Summary:
+        textarea(name="summary", cols="75", rows="4", placeholder='enter book sumary') #{undefined===book?'': book.summary}
+        input(type='submit', class='submit' value='submit')
+
+    if book && book.errors
+        div(class='danger', style='margin-left:25%; width:50%; font-size:100%; margin-top: 2%')
+            ul
+                for error in book.errors
+                    li #{error.msg}
+
+    script(src='/javascripts/scripts.js')

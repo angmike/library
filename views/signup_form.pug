@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    form(method='POST' action="")
+        label(for="first_name") First Name
+            span(style='color:red') *
+        input(type="text" name='first_name' id='first_name' placeholder='first name' value=(user.first_name)?user.first_name: '')
+        label(for="family_name") Family Name
+            span(style='color:red') *
+        input(type="text" name='family_name' id='family_name' placeholder='family name' value=(user.family_name)?user.family_name: '')
+        label(for="username") User Name
+        input(type="text" name='username' id='username' placeholder='enter a preffered username' value=(user.username)?user.username: '')
+        label(for="email") Email
+            span(style='color:red') *
+        input(type="email" name='email' id='email' placeholder='enter email' value=(user.email)?user.email: '')
+        label(for="tel") Contact
+        br
+        div(id='contact' name='contact')
+            select(name="code" id='code')
+                option(value='+256') Uganda
+                option(value='+254') Kenya
+                option(value='+255') Tanzania
+            input(type="tel" name='tel' id='tel' placeholder='tephone number' value=(user.tel)?user.tel: '')
+        br
+        input(name='phone' id='phone' hidden)
+        label(for="password") Password
+            span(style='color:red') *
+        div(class='with-eye' onclick='disp(this)')
+            input(type="password", name='password' id='password' placeholder='enter password' value=(user.password)?user.password: '')
+            div(class='eye', onmousedown='see(this)')
+                div(id='pupil')
+        label(for="repeat") Repeat Password
+            span(style='color:red') *
+        div(class='with-eye' onclick='disp(this)')
+            input(type="password" name='repeat' id='repeat' placeholder='repeat password' value=(user.repeat)?user.repeat: '' oninput='checkRepeat()' required)
+            div(class='eye', onclick='see(this)')
+                div(id='pupil')
+        span(id='repeat error' style='display: none').text-danger #[em passwords do not match]
+        br
+        button(type='submit' onclick='getTel()') submit
+        button(type='reset') reset
+
+    if errors
+        div(class='danger', style='margin-left:25%; width:50%; font-size:100%; margin-top: 2%')
+            ul
+                for error in errors
+                    li #{error}
+
+    script(src='/javascripts/scripts.js')
